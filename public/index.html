@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capture & Collect - Photography Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-camera"></i>
+        <div class="logo-text">
+          <span class="logo-title">CAPTURE</span>
+          <span class="logo-subtitle">& COLLECT</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="#highlights">HIGHLIGHTS</a></li>
+          <li><a href="#filmlab">FILM LAB</a></li>
+          <li><a href="#about">ABOUT</a></li>
+          <li><a href="#prints">PRINTS</a></li>
+          <li><a href="#cart" class="cart-btn">CART</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section - Featured Works Carousel (无标题显示) -->
+  <section class="hero">
+    <div class="hero-carousel">
+      <div class="carousel-track" id="hero-track">
+        <!-- 图片将通过JavaScript动态加载 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Highlights & Archive Row -->
+    <div class="content-row">
+      <!-- Highlights Section (每日从Hero随机抽选) -->
+      <section id="highlights" class="highlights-section">
+        <h2 class="section-title">HIGHLIGHTS</h2>
+        <div class="highlights-grid" id="highlights-grid">
+          <!-- 图片将通过JavaScript从Hero中随机抽选 -->
+        </div>
+        <a href="#" class="view-all-btn">VIEW ALL</a>
+      </section>
+
+      <!-- Archive Section (按胶片画幅分类，从API动态加载) -->
+      <section class="archive-section">
+        <h2 class="section-title">ARCHIVE</h2>
+        
+        <!-- 胶片画幅分类（通过JS动态渲染） -->
+        <div class="archive-formats">
+          <!-- 内容由renderArchive()动态生成 -->
+        </div>
+        
+        <a href="#" class="full-archive-btn">FULL ARCHIVE</a>
+      </section>
+    </div>
+
+    <!-- Film Lab & Prints Row -->
+    <div class="content-row">
+      <!-- Film Lab Section -->
+      <section id="filmlab" class="filmlab-section">
+        <h2 class="section-title">FILM LAB</h2>
+        <div class="filmlab-content">
+          <div class="filmlab-image">
+            <img src="static/imgs/img2.jpg" alt="Film Lab">
+            <span class="image-badge"><i class="fas fa-shopping-cart"></i></span>
+            <div class="filmlab-image-info">
+              <h4>KODAK PORTRA 400</h4>
+              <p>Classic color film</p>
+            </div>
+          </div>
+          <div class="filmlab-services">
+            <div class="service-item">
+              <h3>DEVELOPMENT SERVICES</h3>
+              <p class="price">$31.00</p>
+              <p>Professional film development and scanning services</p>
+              <p class="price-small">$5.00</p>
+            </div>
+            <div class="service-item">
+              <h3>FILM STOCK</h3>
+              <p>Choose from our selection of premium film stocks</p>
+              <p class="price">$5/3.00</p>
+              <p>Large format film available upon request</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prints Section -->
+      <section id="prints" class="prints-section">
+        <h2 class="section-title">PRINTS</h2>
+        <div class="prints-content">
+          <div class="prints-gallery">
+            <div class="print-item">
+              <img src="static/imgs/img3.jpg" alt="Kodak Portra 400">
+              <span class="image-badge"><i class="fas fa-shopping-cart"></i></span>
+              <p>Kodak Portra #400</p>
+            </div>
+            <div class="print-item">
+              <img src="static/imgs/img4.jpg" alt="Ilford Pan F">
+              <span class="image-badge"><i class="fas fa-shopping-cart"></i></span>
+              <p>ILFORD PAN F UNFRAMED</p>
+            </div>
+          </div>
+          <div class="prints-info">
+            <h3>FILM STOCK</h3>
+            <p class="price">$FILM/92.00</p>
+            <div class="print-option">
+              <img src="static/imgs/img1.jpg" alt="Film Stock">
+              <div class="option-details">
+                <p>FILM STOCK</p>
+                <select>
+                  <option>Base: Fujifilm</option>
+                  <option>Base: Kodak</option>
+                </select>
+                <select>
+                  <option>Frame: Included</option>
+                  <option>Frame: None</option>
+                </select>
+                <select>
+                  <option>Print: Frameless</option>
+                  <option>Print: Framed</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="footer-brand">
+          <i class="fas fa-camera"></i>
+          <span>GW&SI</span>
+        </div>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-vimeo-v"></i></a>
+          <a href="#"><i class="fas fa-home"></i></a>
+        </div>
+        <p class="copyright">© CAPTURE & COLLECT 2023</p>
+      </div>
+      <div class="footer-center">
+        <div class="newsletter">
+          <label for="email">SUBSCRIBE</label>
+          <input type="email" id="email" placeholder="Your email">
+          <button type="submit">SUBSCRIBE</button>
+        </div>
+      </div>
+      <div class="footer-right">
+        <nav class="footer-nav">
+          <a href="#">TERMS OF SERVICE</a>
+          <a href="#">PRIVACY POLICY</a>
+          <a href="#">CONTACT</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript: Hero和Highlights动态加载 -->
+  <script>
+    let heroImages = [];
+
+    // 基于日期的随机种子（每天相同）
+    function getDailySeed() {
+      const today = new Date();
+      return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    }
+
+    // 伪随机数生成器（基于种子）
+    function seededRandom(seed) {
+      const x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    }
+
+    // 基于日期随机打乱数组
+    function shuffleWithSeed(array, seed) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        seed++;
+        const j = Math.floor(seededRandom(seed) * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    // 渲染Hero轮播（无标题）
+    function renderHero() {
+      const track = document.getElementById('hero-track');
+      if (!track || heroImages.length === 0) return;
+
+      const seed = getDailySeed();
+      const shuffledImages = shuffleWithSeed(heroImages, seed);
+
+      track.innerHTML = shuffledImages.map(src => `
+        <div class="carousel-item">
+          <div class="carousel-image">
+            <img src="${src}" alt="Photo" loading="lazy">
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 渲染Highlights（从Hero随机抽选2张）
+    function renderHighlights() {
+      const grid = document.getElementById('highlights-grid');
+      if (!grid || heroImages.length === 0) return;
+
+      const seed = getDailySeed();
+      const shuffledImages = shuffleWithSeed(heroImages, seed + 1000);
+      const selectedImages = shuffledImages.slice(0, 2);
+
+      grid.innerHTML = selectedImages.map(src => `
+        <div class="highlight-card">
+          <div class="highlight-image">
+            <img src="${src}" alt="Highlight" loading="lazy">
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 渲染Archive（从API获取）
+    async function renderArchive() {
+      try {
+        const response = await fetch('/api/images/archive');
+        const data = await response.json();
+        
+        const container = document.querySelector('.archive-formats');
+        if (!container) return;
+
+        let html = '';
+        for (const [format, months] of Object.entries(data)) {
+          html += `
+            <div class="format-group" data-format="${format}">
+              <h3 class="format-title">${format}</h3>
+              <div class="format-months">
+          `;
+          
+          for (const [month, info] of Object.entries(months)) {
+            const cover = info.cover || '';
+            html += `
+              <a href="#archive-${format}-${month}" class="month-thumb">
+                <img src="${cover}" alt="${format} ${month}">
+                <span>${month}</span>
+              </a>
+            `;
+          }
+          
+          html += `</div></div>`;
+        }
+        
+        container.innerHTML = html;
+      } catch (err) {
+        console.error('Failed to load archive:', err);
+      }
+    }
+
+    // 从API加载Hero图片
+    async function loadHeroImages() {
+      try {
+        const response = await fetch('/api/images/hero');
+        const data = await response.json();
+        heroImages = data.images || [];
+        renderHero();
+        renderHighlights();
+      } catch (err) {
+        console.error('Failed to load hero images:', err);
+      }
+    }
+
+    // 页面加载时执行
+    document.addEventListener('DOMContentLoaded', () => {
+      loadHeroImages();
+      renderArchive();
+    });
+  </script>
+</body>
+</html>
+
+
+
+
