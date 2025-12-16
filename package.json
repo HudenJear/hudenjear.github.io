@@ -1,7 +1,7 @@
 {
-  "name": "capture-collect-portfolio",
+  "name": "reversal-chrome",
   "version": "1.0.0",
-  "description": "Photography Portfolio Website",
+  "description": "Reversal & Chrome - Slide Film Archive",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

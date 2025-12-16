@@ -1,0 +1,101 @@
+[
+  {
+    "id": "velvia-50",
+    "name": "Fujifilm Velvia 50 (RVP 50)",
+    "brand": "Fujifilm",
+    "iso": "ISO 50",
+    "process": "E-6",
+    "shortDescription": "Ultra-saturated color, high contrast, legendary landscape slide film.",
+    "overview": "Velvia 50 is famous for extremely vivid color and strong contrast. It is best used in controlled light and for subjects where you want punchy color.",
+    "keyCharacteristics": [
+      "Very high saturation",
+      "High contrast",
+      "Fine grain",
+      "Narrow exposure latitude"
+    ],
+    "recommendedUse": [
+      "Landscape",
+      "Nature",
+      "Architecture (careful with contrast)"
+    ],
+    "formats": ["35mm", "120"],
+    "availability": "Limited / region dependent",
+    "notes": "Meter carefully. Protect highlights. Great with warming filters in cool daylight.",
+    "links": [
+      { "label": "Fujifilm (general)", "url": "https://www.fujifilm.com/" }
+    ]
+  },
+  {
+    "id": "provia-100f",
+    "name": "Fujifilm Provia 100F (RDP III)",
+    "brand": "Fujifilm",
+    "iso": "ISO 100",
+    "process": "E-6",
+    "shortDescription": "Neutral, versatile slide film with finer contrast and better latitude.",
+    "overview": "Provia 100F is often considered the most versatile Fujifilm slide stock. Colors are more neutral than Velvia, with slightly wider latitude.",
+    "keyCharacteristics": [
+      "Neutral color",
+      "Moderate contrast",
+      "Fine grain",
+      "Good reciprocity performance"
+    ],
+    "recommendedUse": [
+      "Travel",
+      "Street (controlled contrast)",
+      "Portrait (when you want a slide look)"
+    ],
+    "formats": ["35mm", "120"],
+    "availability": "Limited / region dependent",
+    "notes": "A good default choice if you are unsure which slide film to use.",
+    "links": []
+  },
+  {
+    "id": "ektachrome-e100",
+    "name": "Kodak Ektachrome E100",
+    "brand": "Kodak",
+    "iso": "ISO 100",
+    "process": "E-6",
+    "shortDescription": "Classic Kodak slide palette with clean skin tones and controlled saturation.",
+    "overview": "Ektachrome E100 is a modern, widely available color reversal film. It is known for relatively natural color and pleasant skin tones.",
+    "keyCharacteristics": [
+      "Clean blues",
+      "Natural skin tone rendering",
+      "Moderate saturation",
+      "Relatively forgiving for slide film"
+    ],
+    "recommendedUse": [
+      "Portrait",
+      "Everyday daylight",
+      "Travel"
+    ],
+    "formats": ["35mm", "120", "4x5"],
+    "availability": "Generally available",
+    "notes": "Great starting point for E-6 if you want a less extreme look than Velvia.",
+    "links": [
+      { "label": "Kodak Professional Films", "url": "https://www.kodak.com/" }
+    ]
+  },
+  {
+    "id": "precisa-100",
+    "name": "AgfaPhoto CT Precisa 100",
+    "brand": "AgfaPhoto",
+    "iso": "ISO 100",
+    "process": "E-6",
+    "shortDescription": "Budget-friendly slide option (stock may vary by batch/region).",
+    "overview": "CT Precisa 100 is commonly sold as an affordable E-6 slide film. Depending on region and supply chain, the exact emulsion source may vary over time.",
+    "keyCharacteristics": [
+      "Affordable entry to E-6",
+      "Moderate saturation",
+      "Batch/region variability possible"
+    ],
+    "recommendedUse": [
+      "Learning E-6",
+      "General daylight",
+      "Travel"
+    ],
+    "formats": ["35mm"],
+    "availability": "Varies by market",
+    "notes": "If consistent results matter, test a roll from the same batch and lab.",
+    "links": []
+  }
+]

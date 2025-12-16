@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highlights - Reversal & Chrome</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-camera"></i>
+        <div class="logo-text">
+          <span class="logo-title">REVERSAL</span>
+          <span class="logo-subtitle">& CHROME</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="/#highlights">HIGHLIGHTS</a></li>
+          <li><a href="/reversal-intro">COLOR REVERSAL FILMS</a></li>
+          <li><a href="/#about">ABOUT</a></li>
+          <li><a href="/film-library">FILM LIBRARY</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero">
+      <h1 class="page-title">Highlights</h1>
+      <p class="page-subtitle">All highlights (derived from the daily hero shuffle). Click any frame to view details.</p>
+      <a href="javascript:void(0)" class="back-btn" onclick="history.back()">
+        <i class="fas fa-arrow-left"></i> 返回上一级
+      </a>
+      <a class="view-all-btn" href="/#highlights">BACK</a>
+    </section>
+
+    <section class="page-section">
+      <div id="highlights-grid" class="highlights-grid-all"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="footer-brand">
+          <i class="fas fa-camera"></i>
+          <span>Reversal &amp; Chrome</span>
+        </div>
+        <p class="copyright">© REVERSAL &amp; CHROME 2024</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let manifest = null;
+    let heroPhotoIds = [];
+
+    function getDailySeed() {
+      const today = new Date();
+      return today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    }
+
+    function seededRandom(seed) {
+      const x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    }
+
+    function shuffleWithSeed(array, seed) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        seed++;
+        const j = Math.floor(seededRandom(seed) * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    function goToPhoto(photoId) {
+      window.location.href = `/photo?id=${encodeURIComponent(photoId)}`;
+    }
+
+    function getPhotoUrl(photoId) {
+      if (!manifest || !manifest.photos || !manifest.photos[photoId]) return '';
+      return `static/imgs/${manifest.photos[photoId].file}`;
+    }
+
+    function renderAllHighlights() {
+      const grid = document.getElementById('highlights-grid');
+      if (!grid || heroPhotoIds.length === 0) return;
+
+      const seed = getDailySeed();
+      const shuffledIds = shuffleWithSeed(heroPhotoIds, seed + 1000);
+
+      grid.innerHTML = shuffledIds.map(id => {
+        const url = getPhotoUrl(id);
+        return `
+          <div class="highlight-card" onclick="goToPhoto('${id}')" style="cursor:pointer;">
+            <div class="highlight-image">
+              <img src="${url}" alt="Highlight" loading="lazy">
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function loadManifest() {
+      try {
+        const response = await fetch('/api/manifest');
+        manifest = await response.json();
+        heroPhotoIds = manifest.indexes?.hero || [];
+        renderAllHighlights();
+      } catch (err) {
+        console.error('Failed to load manifest:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadManifest();
+    });
+  </script>
+</body>
+</html>

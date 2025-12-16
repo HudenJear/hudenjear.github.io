@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive Month - Reversal & Chrome</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-camera"></i>
+        <div class="logo-text">
+          <span class="logo-title">REVERSAL</span>
+          <span class="logo-subtitle">& CHROME</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="/#highlights">HIGHLIGHTS</a></li>
+          <li><a href="/reversal-intro">COLOR REVERSAL FILMS</a></li>
+          <li><a href="/#about">ABOUT</a></li>
+          <li><a href="/film-library">FILM LIBRARY</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero">
+      <h1 id="archive-title" class="page-title">Archive</h1>
+      <p id="archive-subtitle" class="page-subtitle"></p>
+      <a href="javascript:void(0)" class="back-btn" onclick="history.back()">
+        <i class="fas fa-arrow-left"></i> 返回上一级
+      </a>
+      <a class="view-all-btn" href="/archive">BACK TO ARCHIVE</a>
+    </section>
+
+    <section class="page-section">
+      <div id="month-grid" class="highlights-grid-all"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="footer-brand">
+          <i class="fas fa-camera"></i>
+          <span>Reversal &amp; Chrome</span>
+        </div>
+        <p class="copyright">© REVERSAL &amp; CHROME 2024</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let manifest = null;
+
+    function getParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        format: params.get('format') || '',
+        month: params.get('month') || ''
+      };
+    }
+
+    function goToPhoto(photoId) {
+      window.location.href = `/photo?id=${encodeURIComponent(photoId)}`;
+    }
+
+    function getPhotoUrl(photoId) {
+      if (!manifest || !manifest.photos || !manifest.photos[photoId]) return '';
+      return `static/imgs/${manifest.photos[photoId].file}`;
+    }
+
+    function renderMonth(format, month) {
+      const titleEl = document.getElementById('archive-title');
+      const subtitleEl = document.getElementById('archive-subtitle');
+      const grid = document.getElementById('month-grid');
+
+      if (titleEl) titleEl.textContent = `${format} ${month}`.trim() || 'Archive';
+      if (subtitleEl) subtitleEl.textContent = 'Click any frame to view details.';
+      document.title = `${format} ${month} - Reversal & Chrome`;
+
+      const ids = manifest?.indexes?.archive?.[format]?.[month];
+      if (!grid || !Array.isArray(ids) || ids.length === 0) {
+        if (grid) grid.innerHTML = '';
+        return;
+      }
+
+      grid.innerHTML = ids.map(id => {
+        const url = getPhotoUrl(id);
+        return `
+          <div class="highlight-card" onclick="goToPhoto('${id}')" style="cursor:pointer;">
+            <div class="highlight-image">
+              <img src="${url}" alt="Photo" loading="lazy">
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function loadManifest() {
+      const { format, month } = getParams();
+      if (!format || !month) {
+        window.location.href = '/archive';
+        return;
+      }
+
+      try {
+        const resp = await fetch('/api/manifest');
+        manifest = await resp.json();
+        renderMonth(format, month);
+      } catch (err) {
+        console.error('Failed to load manifest:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadManifest();
+    });
+  </script>
+</body>
+</html>

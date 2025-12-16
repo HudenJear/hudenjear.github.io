@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capture & Collect - Photography Portfolio</title>
+  <title>Reversal & Chrome - Slide Film Archive</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -14,16 +14,16 @@
       <div class="logo">
         <i class="fas fa-camera"></i>
         <div class="logo-text">
-          <span class="logo-title">CAPTURE</span>
-          <span class="logo-subtitle">& COLLECT</span>
+          <span class="logo-title">REVERSAL</span>
+          <span class="logo-subtitle">& CHROME</span>
         </div>
       </div>
       <nav class="nav">
         <ul class="nav-list">
           <li><a href="#highlights">HIGHLIGHTS</a></li>
-          <li><a href="#filmlab">FILM LAB</a></li>
+          <li><a href="/reversal-intro">COLOR REVERSAL FILMS</a></li>
           <li><a href="#about">ABOUT</a></li>
-          <li><a href="#prints">PRINTS</a></li>
+          <li><a href="/film-library">FILM LIBRARY</a></li>
           <li><a href="#cart" class="cart-btn">CART</a></li>
         </ul>
       </nav>
@@ -49,7 +49,7 @@
         <div class="highlights-grid" id="highlights-grid">
           <!-- 图片将通过JavaScript从Hero中随机抽选 -->
         </div>
-        <a href="#" class="view-all-btn">VIEW ALL</a>
+        <a href="/highlights" class="view-all-btn">VIEW ALL</a>
       </section>
 
       <!-- Archive Section (按胶片画幅分类，从API动态加载) -->
@@ -61,82 +61,63 @@
           <!-- 内容由renderArchive()动态生成 -->
         </div>
         
-        <a href="#" class="full-archive-btn">FULL ARCHIVE</a>
+        <a href="/archive" class="full-archive-btn">FULL ARCHIVE</a>
       </section>
     </div>
 
-    <!-- Film Lab & Prints Row -->
+    <!-- Color Reversal Films Introduction & Film Library Row -->
     <div class="content-row">
-      <!-- Film Lab Section -->
-      <section id="filmlab" class="filmlab-section">
-        <h2 class="section-title">FILM LAB</h2>
-        <div class="filmlab-content">
-          <div class="filmlab-image">
-            <img src="static/imgs/img2.jpg" alt="Film Lab">
-            <span class="image-badge"><i class="fas fa-shopping-cart"></i></span>
-            <div class="filmlab-image-info">
-              <h4>KODAK PORTRA 400</h4>
-              <p>Classic color film</p>
-            </div>
+      <section class="reversal-intro-section">
+        <h2 class="section-title">COLOR REVERSAL FILMS INTRODUCTION</h2>
+        <div class="reversal-intro-content">
+          <div class="reversal-intro-text">
+            <h3>What is color reversal film (slide film)?</h3>
+            <p>
+              Color reversal film produces a positive image directly on the film, usually processed with E-6.
+              It is known for rich color, high contrast, and a distinctive "projectable" look.
+            </p>
+            <p>
+              Here I collect notes about major stocks (Velvia, Provia, Ektachrome, etc.),
+              including their characteristics, exposure tips, reciprocity behavior, and availability.
+            </p>
+            <p>
+              This site focuses exclusively on slide film, and selected frames are available for purchase as original film.
+            </p>
+            <a href="/reversal-intro" class="view-all-btn">READ INTRODUCTION</a>
           </div>
-          <div class="filmlab-services">
-            <div class="service-item">
-              <h3>DEVELOPMENT SERVICES</h3>
-              <p class="price">$31.00</p>
-              <p>Professional film development and scanning services</p>
-              <p class="price-small">$5.00</p>
-            </div>
-            <div class="service-item">
-              <h3>FILM STOCK</h3>
-              <p>Choose from our selection of premium film stocks</p>
-              <p class="price">$5/3.00</p>
-              <p>Large format film available upon request</p>
-            </div>
+          <div class="reversal-intro-image">
+            <img src="static/imgs/img2.jpg" alt="Color Reversal Film">
           </div>
         </div>
       </section>
 
-      <!-- Prints Section -->
-      <section id="prints" class="prints-section">
-        <h2 class="section-title">PRINTS</h2>
-        <div class="prints-content">
-          <div class="prints-gallery">
-            <div class="print-item">
-              <img src="static/imgs/img3.jpg" alt="Kodak Portra 400">
-              <span class="image-badge"><i class="fas fa-shopping-cart"></i></span>
-              <p>Kodak Portra #400</p>
-            </div>
-            <div class="print-item">
-              <img src="static/imgs/img4.jpg" alt="Ilford Pan F">
-              <span class="image-badge"><i class="fas fa-shopping-cart"></i></span>
-              <p>ILFORD PAN F UNFRAMED</p>
-            </div>
-          </div>
-          <div class="prints-info">
-            <h3>FILM STOCK</h3>
-            <p class="price">$FILM/92.00</p>
-            <div class="print-option">
-              <img src="static/imgs/img1.jpg" alt="Film Stock">
-              <div class="option-details">
-                <p>FILM STOCK</p>
-                <select>
-                  <option>Base: Fujifilm</option>
-                  <option>Base: Kodak</option>
-                </select>
-                <select>
-                  <option>Frame: Included</option>
-                  <option>Frame: None</option>
-                </select>
-                <select>
-                  <option>Print: Frameless</option>
-                  <option>Print: Framed</option>
-                </select>
-              </div>
-            </div>
-          </div>
+      <section class="film-library-section">
+        <h2 class="section-title">FILM LIBRARY</h2>
+        <div class="film-library-preview" id="film-library-grid">
+          <!-- Film library preview cards rendered by JavaScript -->
         </div>
+        <a href="/film-library" class="full-archive-btn">OPEN LIBRARY</a>
       </section>
     </div>
+
+    <section id="about" class="about-section">
+      <h2 class="section-title">ABOUT</h2>
+      <div class="about-content">
+        <div class="about-block">
+          <h3>Purpose</h3>
+          <p>
+            Reversal & Chrome is a focused archive for color reversal films (E-6 slide film), built to keep work organized,
+            searchable, and easy to share. It also serves as a small storefront: some frames are available for purchase as
+            original slides/film.
+          </p>
+        </div>
+        <div class="about-block">
+          <h3>Author</h3>
+          <p>HudenJear</p>
+          <p>If you have suggestions, film stock corrections, or scanning workflow tips, feel free to reach out via the links in the footer.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
@@ -145,7 +126,7 @@
       <div class="footer-left">
         <div class="footer-brand">
           <i class="fas fa-camera"></i>
-          <span>GW&SI</span>
+          <span>Reversal &amp; Chrome</span>
         </div>
         <div class="social-links">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -154,7 +135,7 @@
           <a href="#"><i class="fab fa-vimeo-v"></i></a>
           <a href="#"><i class="fas fa-home"></i></a>
         </div>
-        <p class="copyright">© CAPTURE & COLLECT 2023</p>
+        <p class="copyright">© REVERSAL &amp; CHROME 2023</p>
       </div>
       <div class="footer-center">
         <div class="newsletter">
@@ -173,9 +154,10 @@
     </div>
   </footer>
 
-  <!-- JavaScript: Hero和Highlights动态加载 -->
+  <!-- JavaScript: 从manifest.json加载数据 -->
   <script>
-    let heroImages = [];
+    let manifest = null;
+    let heroPhotoIds = [];
 
     // 基于日期的随机种子（每天相同）
     function getDailySeed() {
@@ -200,94 +182,150 @@
       return shuffled;
     }
 
-    // 渲染Hero轮播（无标题）
+    // 跳转到图片详情页（使用图片ID）
+    function goToPhoto(photoId) {
+      window.location.href = `/photo?id=${encodeURIComponent(photoId)}`;
+    }
+
+    function goToFilm(filmId) {
+      window.location.href = `/film?id=${encodeURIComponent(filmId)}`;
+    }
+
+    function goToArchiveMonth(format, month) {
+      window.location.href = `/archive-month?format=${encodeURIComponent(format)}&month=${encodeURIComponent(month)}`;
+    }
+
+    // 获取图片URL（从manifest）
+    function getPhotoUrl(photoId) {
+      if (!manifest || !manifest.photos[photoId]) return '';
+      return `static/imgs/${manifest.photos[photoId].file}`;
+    }
+
+    // 渲染Hero轮播（无标题，可点击，CSS裁剪为正方形）
     function renderHero() {
       const track = document.getElementById('hero-track');
-      if (!track || heroImages.length === 0) return;
+      if (!track || heroPhotoIds.length === 0) return;
 
       const seed = getDailySeed();
-      const shuffledImages = shuffleWithSeed(heroImages, seed);
+      const shuffledIds = shuffleWithSeed(heroPhotoIds, seed);
 
-      track.innerHTML = shuffledImages.map(src => `
-        <div class="carousel-item">
-          <div class="carousel-image">
-            <img src="${src}" alt="Photo" loading="lazy">
+      track.innerHTML = shuffledIds.map(id => {
+        const url = getPhotoUrl(id);
+        return `
+          <div class="carousel-item" onclick="goToPhoto('${id}')" style="cursor:pointer;">
+            <div class="carousel-image">
+              <img src="${url}" alt="Photo" loading="lazy">
+            </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
-    // 渲染Highlights（从Hero随机抽选2张）
+    // 渲染Highlights（从Hero随机抽选2张，可点击，CSS裁剪为正方形）
     function renderHighlights() {
       const grid = document.getElementById('highlights-grid');
-      if (!grid || heroImages.length === 0) return;
+      if (!grid || heroPhotoIds.length === 0) return;
 
       const seed = getDailySeed();
-      const shuffledImages = shuffleWithSeed(heroImages, seed + 1000);
-      const selectedImages = shuffledImages.slice(0, 2);
+      const shuffledIds = shuffleWithSeed(heroPhotoIds, seed + 1000);
+      const selectedIds = shuffledIds.slice(0, 2);
 
-      grid.innerHTML = selectedImages.map(src => `
-        <div class="highlight-card">
-          <div class="highlight-image">
-            <img src="${src}" alt="Highlight" loading="lazy">
+      grid.innerHTML = selectedIds.map(id => {
+        const url = getPhotoUrl(id);
+        return `
+          <div class="highlight-card" onclick="goToPhoto('${id}')" style="cursor:pointer;">
+            <div class="highlight-image">
+              <img src="${url}" alt="Highlight" loading="lazy">
+            </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
-    // 渲染Archive（从API获取）
-    async function renderArchive() {
-      try {
-        const response = await fetch('/api/images/archive');
-        const data = await response.json();
-        
-        const container = document.querySelector('.archive-formats');
-        if (!container) return;
+    // 渲染Archive（从manifest获取，按画幅/月份分类）
+    function renderArchive() {
+      if (!manifest || !manifest.indexes || !manifest.indexes.archive) return;
+      
+      const container = document.querySelector('.archive-formats');
+      if (!container) return;
 
-        let html = '';
-        for (const [format, months] of Object.entries(data)) {
+      const archive = manifest.indexes.archive;
+      let html = '';
+
+      for (const [format, months] of Object.entries(archive)) {
+        html += `
+          <div class="format-group" data-format="${format}">
+            <h3 class="format-title">${format}</h3>
+            <div class="format-months">
+        `;
+
+        const sortedMonths = Object.keys(months).sort().reverse();
+        for (const month of sortedMonths) {
+          const photoIds = months[month];
+          if (!Array.isArray(photoIds) || photoIds.length === 0) continue;
+
+          const coverId = photoIds[0];
+          const coverUrl = getPhotoUrl(coverId);
+
           html += `
-            <div class="format-group" data-format="${format}">
-              <h3 class="format-title">${format}</h3>
-              <div class="format-months">
+            <a href="javascript:void(0)" class="month-thumb" onclick='goToArchiveMonth(${JSON.stringify(format)}, ${JSON.stringify(month)})'>
+              <img src="${coverUrl}" alt="${format} ${month}" loading="lazy">
+              <span>${month}</span>
+            </a>
           `;
-          
-          for (const [month, info] of Object.entries(months)) {
-            const cover = info.cover || '';
-            html += `
-              <a href="#archive-${format}-${month}" class="month-thumb">
-                <img src="${cover}" alt="${format} ${month}">
-                <span>${month}</span>
-              </a>
-            `;
-          }
-          
-          html += `</div></div>`;
         }
+
+        html += `</div></div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    // 从API加载manifest
+    async function loadManifest() {
+      try {
+        const response = await fetch('/api/manifest');
+        manifest = await response.json();
         
-        container.innerHTML = html;
+        // 获取Hero图片ID列表
+        heroPhotoIds = manifest.indexes?.hero || [];
+        
+        // 渲染各部分
+        renderHero();
+        renderHighlights();
+        renderArchive();
       } catch (err) {
-        console.error('Failed to load archive:', err);
+        console.error('Failed to load manifest:', err);
       }
     }
 
-    // 从API加载Hero图片
-    async function loadHeroImages() {
+    async function loadFilmLibraryPreview() {
       try {
-        const response = await fetch('/api/images/hero');
-        const data = await response.json();
-        heroImages = data.images || [];
-        renderHero();
-        renderHighlights();
+        const resp = await fetch('/data/reversal-films.json');
+        const films = await resp.json();
+        const grid = document.getElementById('film-library-grid');
+        if (!grid) return;
+
+        const preview = Array.isArray(films) ? films.slice(0, 4) : [];
+        grid.innerHTML = preview.map(film => `
+          <div class="library-card" onclick="goToFilm('${film.id}')" style="cursor:pointer;">
+            <div class="library-card-header">
+              <h3 class="library-card-title">${film.name}</h3>
+              <span class="library-card-badge">${film.iso}</span>
+            </div>
+            <p class="library-card-meta">${film.brand} · ${film.process}</p>
+            <p class="library-card-desc">${film.shortDescription || ''}</p>
+          </div>
+        `).join('');
       } catch (err) {
-        console.error('Failed to load hero images:', err);
+        console.error('Failed to load film library preview:', err);
       }
     }
 
     // 页面加载时执行
     document.addEventListener('DOMContentLoaded', () => {
-      loadHeroImages();
-      renderArchive();
+      loadManifest();
+      loadFilmLibraryPreview();
     });
   </script>
 </body>

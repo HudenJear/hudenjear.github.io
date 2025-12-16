@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Detail - Reversal & Chrome</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="photo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-camera"></i>
+        <div class="logo-text">
+          <span class="logo-title">REVERSAL</span>
+          <span class="logo-subtitle">& CHROME</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="/#highlights">HIGHLIGHTS</a></li>
+          <li><a href="/reversal-intro">COLOR REVERSAL FILMS</a></li>
+          <li><a href="/#about">ABOUT</a></li>
+          <li><a href="/film-library">FILM LIBRARY</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Photo Detail Section -->
+  <main class="photo-detail">
+    <div class="photo-container">
+      <!-- 左侧：大图展示 -->
+      <div class="photo-main">
+        <img id="photo-image" src="" alt="Photo">
+      </div>
+
+      <!-- 右侧：信息面板 -->
+      <div class="photo-info-panel">
+        <!-- Archive 信息 -->
+        <section class="info-section archive-info">
+          <h2 class="info-title">ARCHIVE INFO</h2>
+          <div class="info-content">
+            <div class="info-item">
+              <span class="info-label">画幅 Format</span>
+              <span class="info-value" id="photo-format">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">时间 Date</span>
+              <span class="info-value" id="photo-date">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">文件名 Filename</span>
+              <span class="info-value" id="photo-filename">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">底片状态 Sold</span>
+              <span class="info-value" id="photo-sold">--</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 摄影师信息 -->
+        <section class="info-section photographer-info">
+          <h2 class="info-title">CONTACT PHOTOGRAPHER</h2>
+          <div class="photographer-card">
+            <div class="photographer-avatar">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="photographer-details">
+              <h3 class="photographer-name">Huden Jear</h3>
+              <p class="photographer-bio">Film photography enthusiast. Shooting with Hasselblad 500cm & Olympus OM30.</p>
+              <div class="photographer-links">
+                <a href="mailto:hudenjear@outlook.com" title="Email">
+                  <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://www.zhihu.com/people/huden-jear/posts" target="_blank" title="Zhihu">
+                  <i class="fab fa-zhihu"></i>
+                </a>
+                <a href="https://github.com/HudenJear" target="_blank" title="GitHub">
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 评论区 -->
+        <section class="info-section comment-section">
+          <h2 class="info-title">COMMENTS</h2>
+          
+          <!-- 评论列表 -->
+          <div class="comments-list" id="comments-list">
+            <!-- 评论将通过JS动态加载 -->
+            <p class="no-comments">暂无评论，来说点什么吧！</p>
+          </div>
+
+          <!-- 评论表单 -->
+          <form class="comment-form" id="comment-form">
+            <div class="form-group">
+              <label for="commenter-email">邮箱 Email *</label>
+              <input type="email" id="commenter-email" name="email" required placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label for="commenter-name">昵称 Name</label>
+              <input type="text" id="commenter-name" name="name" placeholder="Anonymous">
+            </div>
+            <div class="form-group">
+              <label for="comment-content">留言 Message *</label>
+              <textarea id="comment-content" name="content" required placeholder="写下你的想法..." rows="4"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-paper-plane"></i> 提交评论
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <!-- 返回按钮 -->
+    <a href="javascript:void(0)" class="back-btn" onclick="history.back()">
+      <i class="fas fa-arrow-left"></i> 返回上一级
+    </a>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p class="copyright">© REVERSAL &amp; CHROME 2024</p>
+    </div>
+  </footer>
+
+  <script>
+    let currentPhotoId = '';
+    let photoData = null;
+
+    // 从URL获取图片ID参数
+    function getPhotoId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('id') || '';
+    }
+
+    // 从API加载图片信息
+    async function loadPhotoInfo() {
+      currentPhotoId = getPhotoId();
+      if (!currentPhotoId) {
+        window.location.href = '/';
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/photo/${encodeURIComponent(currentPhotoId)}`);
+        if (!response.ok) {
+          console.error('Photo not found');
+          window.location.href = '/';
+          return;
+        }
+        
+        photoData = await response.json();
+        
+        // 设置图片（原比例展示）
+        const img = document.getElementById('photo-image');
+        img.src = `static/imgs/${photoData.file}`;
+        img.alt = photoData.originalName || currentPhotoId;
+
+        // 显示Archive信息
+        document.getElementById('photo-format').textContent = photoData.format || '--';
+        document.getElementById('photo-date').textContent = photoData.date || '--';
+        document.getElementById('photo-filename').textContent = photoData.originalName || currentPhotoId;
+
+        const soldEl = document.getElementById('photo-sold');
+        if (soldEl) soldEl.textContent = photoData.sold ? 'SOLD' : 'AVAILABLE';
+
+        // 更新页面标题
+        document.title = `${photoData.format || ''} ${photoData.date || ''} - Reversal & Chrome`;
+
+        // 加载评论
+        loadComments();
+      } catch (err) {
+        console.error('Failed to load photo info:', err);
+      }
+    }
+
+    // 加载评论
+    async function loadComments() {
+      if (!currentPhotoId) return;
+      
+      try {
+        const response = await fetch(`/api/comments/${encodeURIComponent(currentPhotoId)}`);
+        const data = await response.json();
+        
+        const list = document.getElementById('comments-list');
+        
+        if (data.comments && data.comments.length > 0) {
+          list.innerHTML = data.comments.map(comment => `
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-author">${escapeHtml(comment.name || 'Anonymous')}</span>
+                <span class="comment-time">${formatDate(comment.created_at)}</span>
+              </div>
+              <p class="comment-content">${escapeHtml(comment.content)}</p>
+            </div>
+          `).join('');
+        } else {
+          list.innerHTML = '<p class="no-comments">暂无评论，来说点什么吧！</p>';
+        }
+      } catch (err) {
+        console.error('Failed to load comments:', err);
+      }
+    }
+
+    // 提交评论
+    async function submitComment(e) {
+      e.preventDefault();
+      
+      if (!currentPhotoId) return;
+      
+      const form = e.target;
+      const data = {
+        email: form.email.value,
+        name: form.name.value || 'Anonymous',
+        content: form.content.value
+      };
+
+      try {
+        const response = await fetch(`/api/comments/${encodeURIComponent(currentPhotoId)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          form.reset();
+          loadComments();
+          alert('评论提交成功！');
+        } else {
+          const err = await response.json();
+          alert('提交失败: ' + (err.error || '未知错误'));
+        }
+      } catch (err) {
+        console.error('Failed to submit comment:', err);
+        alert('提交失败，请稍后重试');
+      }
+    }
+
+    // 工具函数：HTML转义
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // 工具函数：格式化日期
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    // 页面加载
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPhotoInfo();
+      document.getElementById('comment-form').addEventListener('submit', submitComment);
+    });
+  </script>
+</body>
+</html>

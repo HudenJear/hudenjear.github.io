@@ -1,0 +1,300 @@
+/* Photo Detail Page Styles */
+
+.photo-detail {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px;
+  min-height: calc(100vh - 200px);
+}
+
+.photo-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* 左侧大图 */
+.photo-main {
+  background: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.photo-main img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 右侧信息面板 */
+.photo-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.info-section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.info-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #333;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Archive 信息 */
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #888;
+}
+
+.info-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 摄影师信息 */
+.photographer-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.photographer-avatar {
+  font-size: 48px;
+  color: #ddd;
+}
+
+.photographer-details {
+  flex: 1;
+}
+
+.photographer-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.photographer-bio {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.photographer-links {
+  display: flex;
+  gap: 12px;
+}
+
+.photographer-links a {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 50%;
+  color: #555;
+  transition: all 0.3s;
+}
+
+.photographer-links a:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* 评论区 */
+.comments-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.no-comments {
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+  padding: 20px;
+}
+
+.comment-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.comment-time {
+  font-size: 11px;
+  color: #999;
+}
+
+.comment-content {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* 评论表单 */
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #666;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.submit-btn {
+  padding: 12px 24px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.submit-btn:hover {
+  background: #555;
+}
+
+/* 返回按钮 */
+.back-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2000;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #333;
+  padding: 10px 16px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .photo-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .photo-info-panel {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .photo-detail {
+    padding: 20px;
+  }
+  
+  .info-section {
+    padding: 16px;
+  }
+  
+  .photographer-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .photographer-links {
+    justify-content: center;
+  }
+
+  .back-btn {
+    top: 12px;
+    left: 12px;
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+}

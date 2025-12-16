@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film Library - Reversal & Chrome</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-camera"></i>
+        <div class="logo-text">
+          <span class="logo-title">REVERSAL</span>
+          <span class="logo-subtitle">& CHROME</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="/#highlights">HIGHLIGHTS</a></li>
+          <li><a href="/reversal-intro">COLOR REVERSAL FILMS</a></li>
+          <li><a href="/#about">ABOUT</a></li>
+          <li><a href="/film-library">FILM LIBRARY</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero">
+      <h1 class="page-title">Film Library</h1>
+      <p class="page-subtitle">All color reversal films collected as reference cards. Click any card for full details.</p>
+      <a href="javascript:void(0)" class="back-btn" onclick="history.back()">
+        <i class="fas fa-arrow-left"></i> 返回上一级
+      </a>
+    </section>
+
+    <section class="page-section">
+      <div class="library-toolbar">
+        <input id="library-search" class="library-search" type="search" placeholder="Search by name / brand / ISO..." />
+      </div>
+      <div id="library-grid" class="library-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="footer-brand">
+          <i class="fas fa-camera"></i>
+          <span>Reversal &amp; Chrome</span>
+        </div>
+        <p class="copyright">© REVERSAL &amp; CHROME 2024</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let films = [];
+
+    function goToFilm(filmId) {
+      window.location.href = `/film?id=${encodeURIComponent(filmId)}`;
+    }
+
+    function renderFilms(list) {
+      const grid = document.getElementById('library-grid');
+      if (!grid) return;
+
+      grid.innerHTML = list.map(film => `
+        <div class="library-card" onclick="goToFilm('${film.id}')" style="cursor:pointer;">
+          <div class="library-card-header">
+            <h3 class="library-card-title">${film.name}</h3>
+            <span class="library-card-badge">${film.iso}</span>
+          </div>
+          <p class="library-card-meta">${film.brand} · ${film.process}</p>
+          <p class="library-card-desc">${film.shortDescription || ''}</p>
+        </div>
+      `).join('');
+    }
+
+    function applySearch(query) {
+      const q = (query || '').trim().toLowerCase();
+      if (!q) {
+        renderFilms(films);
+        return;
+      }
+
+      const filtered = films.filter(f => {
+        const hay = [f.name, f.brand, f.iso, f.process, f.shortDescription].filter(Boolean).join(' ').toLowerCase();
+        return hay.includes(q);
+      });
+
+      renderFilms(filtered);
+    }
+
+    async function loadLibrary() {
+      try {
+        const resp = await fetch('/data/reversal-films.json');
+        films = await resp.json();
+        renderFilms(films);
+
+        const search = document.getElementById('library-search');
+        if (search) {
+          search.addEventListener('input', () => applySearch(search.value));
+        }
+      } catch (err) {
+        console.error('Failed to load film library:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadLibrary();
+    });
+  </script>
+</body>
+</html>

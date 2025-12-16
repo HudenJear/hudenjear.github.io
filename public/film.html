@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film Detail - Reversal & Chrome</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <i class="fas fa-camera"></i>
+        <div class="logo-text">
+          <span class="logo-title">REVERSAL</span>
+          <span class="logo-subtitle">& CHROME</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="/#highlights">HIGHLIGHTS</a></li>
+          <li><a href="/reversal-intro">COLOR REVERSAL FILMS</a></li>
+          <li><a href="/#about">ABOUT</a></li>
+          <li><a href="/film-library">FILM LIBRARY</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero">
+      <h1 id="film-title" class="page-title">Film</h1>
+      <p id="film-subtitle" class="page-subtitle"></p>
+      <a href="javascript:void(0)" class="back-btn" onclick="history.back()">
+        <i class="fas fa-arrow-left"></i> 返回上一级
+      </a>
+      <a class="view-all-btn" href="/film-library">BACK TO LIBRARY</a>
+    </section>
+
+    <section class="page-section">
+      <div id="film-detail" class="film-detail"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="footer-brand">
+          <i class="fas fa-camera"></i>
+          <span>Reversal &amp; Chrome</span>
+        </div>
+        <p class="copyright">© REVERSAL &amp; CHROME 2024</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function getFilmId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('id') || '';
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function renderFilm(film) {
+      document.title = `${film.name} - Reversal & Chrome Film Library`;
+      const title = document.getElementById('film-title');
+      const subtitle = document.getElementById('film-subtitle');
+      const container = document.getElementById('film-detail');
+
+      if (title) title.textContent = film.name;
+      if (subtitle) subtitle.textContent = `${film.brand} · ${film.iso} · ${film.process}`;
+
+      const key = Array.isArray(film.keyCharacteristics) ? film.keyCharacteristics : [];
+      const rec = Array.isArray(film.recommendedUse) ? film.recommendedUse : [];
+      const fmts = Array.isArray(film.formats) ? film.formats : [];
+      const links = Array.isArray(film.links) ? film.links : [];
+
+      container.innerHTML = `
+        <div class="film-meta">
+          <div class="film-meta-row">
+            <div class="film-meta-item"><span class="film-meta-label">Process</span><span class="film-meta-value">${escapeHtml(film.process || '--')}</span></div>
+            <div class="film-meta-item"><span class="film-meta-label">Speed</span><span class="film-meta-value">${escapeHtml(film.iso || '--')}</span></div>
+            <div class="film-meta-item"><span class="film-meta-label">Formats</span><span class="film-meta-value">${escapeHtml(fmts.join(', ') || '--')}</span></div>
+          </div>
+          <div class="film-meta-row">
+            <div class="film-meta-item"><span class="film-meta-label">Availability</span><span class="film-meta-value">${escapeHtml(film.availability || '--')}</span></div>
+          </div>
+        </div>
+
+        <div class="film-section">
+          <h2 class="page-section-title">Overview</h2>
+          <p class="page-paragraph">${escapeHtml(film.overview || '')}</p>
+        </div>
+
+        <div class="film-section">
+          <h2 class="page-section-title">Key characteristics</h2>
+          <div class="chip-row">
+            ${key.map(x => `<span class="chip">${escapeHtml(x)}</span>`).join('')}
+          </div>
+        </div>
+
+        <div class="film-section">
+          <h2 class="page-section-title">Recommended use</h2>
+          <div class="chip-row">
+            ${rec.map(x => `<span class="chip">${escapeHtml(x)}</span>`).join('')}
+          </div>
+        </div>
+
+        <div class="film-section">
+          <h2 class="page-section-title">Notes</h2>
+          <p class="page-paragraph">${escapeHtml(film.notes || '')}</p>
+        </div>
+
+        <div class="film-section">
+          <h2 class="page-section-title">Links</h2>
+          <div class="link-list">
+            ${links.length ? links.map(l => `<a class="link-item" href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(l.label || l.url)}</a>`).join('') : '<p class="page-paragraph">No links yet.</p>'}
+          </div>
+        </div>
+      `;
+    }
+
+    async function loadFilm() {
+      const filmId = getFilmId();
+      if (!filmId) {
+        window.location.href = '/film-library';
+        return;
+      }
+
+      try {
+        const resp = await fetch('/data/reversal-films.json');
+        const films = await resp.json();
+        const film = Array.isArray(films) ? films.find(f => f.id === filmId) : null;
+
+        if (!film) {
+          window.location.href = '/film-library';
+          return;
+        }
+
+        renderFilm(film);
+      } catch (err) {
+        console.error('Failed to load film:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFilm();
+    });
+  </script>
+</body>
+</html>
